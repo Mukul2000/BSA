@@ -7,8 +7,8 @@
   },
   "servers": [
     {
-      "url": "https://virtserver.swaggerhub.com/test675872/Greenhouse_dataset/1",
-      "description": "SwaggerHub API Auto Mocking"
+      "url": "https://blueskyassignment2.herokuapp.com/",
+      "description": "Countries API"
     }
   ],
   "paths": {

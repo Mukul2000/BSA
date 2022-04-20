@@ -1,0 +1,125 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Greenhouse_dataset",
+    "description": "",
+    "version": "1"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/test675872/Greenhouse_dataset/1",
+      "description": "SwaggerHub API Auto Mocking"
+    }
+  ],
+  "paths": {
+    "/countries": {
+      "get": {
+        "description": "Returns list of countries with ids, and the range of years available for querying.",
+        "responses": {
+          "200": {
+            "description": "Successfully returned a list of country details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "example": {
+                    "country_or_area": "USA",
+                    "id": 43,
+                    "MAX(YEAR)": 2020,
+                    "MIN(YEAR)": 1990
+                  },
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/country/{id}": {
+      "get": {
+        "description": "Returns queried details of country with id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of country you want to query",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "startYear",
+            "in": "query",
+            "description": "Start year to query from in format YYYY",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endYear",
+            "in": "query",
+            "description": "End year to query till in format YYYY",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+              "name": "parameters",
+              "in": "query",
+              "description": "Search text for category matching / parameter search",
+              "required": false,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                  "type": "string"
+              }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully returned queried data of country with id.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "example": {
+                    "id": 2,
+                    "country_or_area": "Australia",
+                    "year": 2014,
+                    "value": 32343.17,
+                    "category": "nitrous_oxide_n2o_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent"
+                  },
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "startYear or endYear are not in the YYYY format"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {}
+}

@@ -1,12 +1,19 @@
 const express = require('express');
 const sqlite3 = require('sqlite3');
+const swaggerUi = require('swagger-ui-express');
 
 const app = express();
+const db = new sqlite3.Database('./emission.db');
+const swaggerDocument = require('./swagger.json');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); 
+app.use(
+  '/api-docs',
+  swaggerUi.serve, 
+  swaggerUi.setup(swaggerDocument)
+);
 
-const db = new sqlite3.Database('./emission.db');
 
 app.listen(process.env.PORT || 8000, () => {
     console.log("Server started on port 8000");
